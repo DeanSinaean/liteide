@@ -55,6 +55,25 @@ LiteTabWidget::LiteTabWidget(QObject *parent) :
     m_tabBar->setDrawBase(false);
     m_tabBar->setUsesScrollButtons(true);
 
+    m_tabBar->setStyleSheet("\
+    ::tab{background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                                stop: 0 #E1E1E1, stop: 0.4 #DDDDDD,\
+                                stop: 0.5 #D8D8D8, stop: 1.0 #D3D3D3);\
+    border: 2px solid #FFFFFF;\
+    border-bottom-color: #C2C7CB; /* same as the pane color */\
+    border-top-left-radius: 20px;\
+    border-bottom-right-radius: -20px;\
+    min-width: 8ex;\
+    padding-left:10px;\
+    padding-right:25px;\
+    margin-left: -15px;\
+    } \
+    ::tab:selected {background: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,\
+                                                stop: 0 #ffffff, stop: 0.4 #ffffff,\
+                                                stop: 0.5 #ffffff, stop: 1.0 #ffffff);\
+    border-bottom-color: #ffffff;}\
+    ");
+
     m_headerToolBar = new QToolBar;
     m_headerToolBar->setObjectName("toolbar.tabs");
     m_headerToolBar->setIconSize(LiteApi::getToolBarIconSize());

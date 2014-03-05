@@ -96,7 +96,7 @@ LiteEditor::LiteEditor(LiteApi::IApplication *app)
     layout->setMargin(0);
     layout->setSpacing(0);
 /*
-    m_toolBar->setStyleSheet("QToolBar {border: 1px ; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #eeeeee, stop: 1 #ababab); }"\
+    //m_toolBar->setStyleSheet("QToolBar {border: 1px ; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #eeeeee, stop: 1 #ababab); }"\
                              "QToolBar QToolButton { border:1px ; border-radius: 1px; }"\
                              "QToolBar QToolButton::hover { background-color: #ababab;}"\
                              "QToolBar::separator {width:2px; margin-left:2px; margin-right:2px; background-color: qlineargradient(x1: 0, y1: 0, x2: 0, y2: 1,stop: 0 #dedede, stop: 1 #a0a0a0);}");
@@ -104,10 +104,10 @@ LiteEditor::LiteEditor(LiteApi::IApplication *app)
     QHBoxLayout *toolLayout = new QHBoxLayout;
     toolLayout->setMargin(0);
     toolLayout->setSpacing(0);
-    toolLayout->addWidget(m_toolBar);
-    toolLayout->addWidget(m_infoToolBar);
+    //toolLayout->addWidget(m_toolBar);
+    //toolLayout->addWidget(m_infoToolBar);
 
-    layout->addLayout(toolLayout);
+    //layout->addLayout(toolLayout);
 //    QHBoxLayout *hlayout = new QHBoxLayout;
 //    hlayout->addWidget(m_editorWidget);
 //    hlayout->addWidget(m_editorWidget->navigateArea());
@@ -124,7 +124,7 @@ LiteEditor::LiteEditor(LiteApi::IApplication *app)
 
 //    m_editorWidget->document()->setDefaultTextOption(option);
 
-    setEditToolbarVisible(true);
+    //setEditToolbarVisible(true);
 
     connect(m_file->document(),SIGNAL(modificationChanged(bool)),this,SIGNAL(modificationChanged(bool)));
     connect(m_file->document(),SIGNAL(contentsChanged()),this,SIGNAL(contentsChanged()));
@@ -136,7 +136,7 @@ LiteEditor::LiteEditor(LiteApi::IApplication *app)
 
     m_extension->addObject("LiteApi.ITextEditor",this);
     m_extension->addObject("LiteApi.ILiteEditor",this);
-    m_extension->addObject("LiteApi.QToolBar",m_toolBar);
+    //m_extension->addObject("LiteApi.QToolBar",m_toolBar);
     m_extension->addObject("LiteApi.QPlainTextEdit",m_editorWidget);
     m_extension->addObject("LiteApi.ContextMenu",m_contextMenu);
     m_extension->addObject("LiteApi.Menu.Edit",m_editMenu);
@@ -144,7 +144,7 @@ LiteEditor::LiteEditor(LiteApi::IApplication *app)
     m_editorWidget->installEventFilter(m_liteApp->editorManager());
     connect(m_editorWidget,SIGNAL(cursorPositionChanged()),this,SLOT(editPositionChanged()));
     connect(m_editorWidget,SIGNAL(navigationStateChanged(QByteArray)),this,SLOT(navigationStateChanged(QByteArray)));
-    connect(m_editorWidget,SIGNAL(overwriteModeChanged(bool)),m_overInfoAct,SLOT(setVisible(bool)));
+    //connect(m_editorWidget,SIGNAL(overwriteModeChanged(bool)),m_overInfoAct,SLOT(setVisible(bool)));
     connect(m_editorWidget,SIGNAL(requestFontZoom(int)),this,SLOT(requestFontZoom(int)));
     connect(m_lineInfo,SIGNAL(doubleClickEvent()),this,SLOT(gotoLine()));
     connect(m_closeEditorAct,SIGNAL(triggered()),m_liteApp->editorManager(),SLOT(closeEditor()));
@@ -379,47 +379,49 @@ void LiteEditor::findCodecs()
 
 void LiteEditor::createToolBars()
 {
-    m_toolBar = new QToolBar("editor",m_widget);
-    m_toolBar->setIconSize(LiteApi::getToolBarIconSize());
-    m_toolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
+    //m_toolBar = new QToolBar("editor",m_widget);
+    //m_toolBar->setIconSize(LiteApi::getToolBarIconSize());
+    //m_toolBar->setSizePolicy(QSizePolicy::Expanding,QSizePolicy::Preferred);
 
-    m_infoToolBar = new QToolBar("info",m_widget);
-    m_infoToolBar->setIconSize(LiteApi::getToolBarIconSize());
+    //m_infoToolBar = new QToolBar("info",m_widget);
+    //m_infoToolBar->setIconSize(LiteApi::getToolBarIconSize());
 
     //editor toolbar
-    m_toolBar->addAction(m_undoAct);
-    m_toolBar->addAction(m_redoAct);
-    m_toolBar->addSeparator();
-    m_toolBar->addAction(m_cutAct);
-    m_toolBar->addAction(m_copyAct);
-    m_toolBar->addAction(m_pasteAct);
+    //m_toolBar->addAction(m_undoAct);
+    //m_toolBar->addAction(m_redoAct);
+    //m_toolBar->addSeparator();
+    //m_toolBar->addAction(m_cutAct);
+    //m_toolBar->addAction(m_copyAct);
+    //m_toolBar->addAction(m_pasteAct);
 #ifdef LITEEDITOR_FIND
     m_findComboBox = new QComboBox(m_widget);
     m_findComboBox->setEditable(true);
     m_findComboBox->setMinimumWidth(120);
     m_findComboBox->setSizePolicy(QSizePolicy::Preferred,QSizePolicy::Preferred);
-    m_toolBar->addWidget(m_findComboBox);
-    m_toolBar->addSeparator();
+    //m_toolBar->addWidget(m_findComboBox);
+    //m_toolBar->addSeparator();
     connect(m_findComboBox->lineEdit(),SIGNAL(returnPressed()),this,SLOT(findNextText()));
 #endif
 
     //info toolbar
 
     //add lock info
-    m_infoToolBar->addAction(m_lockAct);
+    //m_infoToolBar->addAction(m_lockAct);
 
     //add over info
-    QLabel *overInfo = new QLabel("[Over]");
-    m_overInfoAct = m_infoToolBar->addWidget(overInfo);
-    m_overInfoAct->setVisible(false);
+    //QLabel *overInfo = new QLabel("[Over]");
+    //m_overInfoAct = m_infoToolBar->addWidget(overInfo);
+    //m_overInfoAct->setVisible(false);
 
     //add line info
     m_lineInfo = new QLabelEx("000:000");
-    m_infoToolBar->addWidget(m_lineInfo);
+    //m_infoToolBar->addWidget(m_lineInfo);
 
     //add close
     m_closeEditorAct = new QAction(QIcon("icon:images/closetool.png"),tr("Close Document"),this);
-    m_infoToolBar->addAction(m_closeEditorAct);
+    //m_infoToolBar->addAction(m_closeEditorAct);
+    //m_infoToolBar->setVisible(false);
+    //m_toolBar->setVisible(false);
 }
 
 void LiteEditor::createMenu()
@@ -981,8 +983,8 @@ void LiteEditor::resetFontSize()
 
 void LiteEditor::setEditToolbarVisible(bool visible)
 {
-    m_toolBar->setVisible(visible);
-    m_infoToolBar->setVisible(visible);
+    //m_toolBar->setVisible(visible);
+    //m_infoToolBar->setVisible(visible);
 }
 
 
